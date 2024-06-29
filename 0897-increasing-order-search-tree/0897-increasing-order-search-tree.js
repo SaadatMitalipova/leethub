@@ -8,8 +8,6 @@ class TreeNode {
 
 function increasingBST(root) {
     const nodes = [];
-
-    // In-order traversal to collect nodes
     function inOrder(node) {
         if (node === null) return;
         inOrder(node.left);
@@ -18,20 +16,16 @@ function increasingBST(root) {
     }
 
     inOrder(root);
-
-    // Rebuild tree from collected nodes
     const dummy = new TreeNode(0);
     let current = dummy;
     for (const node of nodes) {
-        node.left = null; // Remove the left child
+        node.left = null;
         current.right = node;
         current = current.right;
     }
 
     return dummy.right;
 }
-
-// Вспомогательная функция для построения дерева из массива
 function buildTreeFromArray(arr, i = 0) {
     if (i >= arr.length || arr[i] === null) return null;
     const root = new TreeNode(arr[i]);
@@ -49,11 +43,9 @@ function printTree(node) {
     }
     console.log(result);
 }
-
-// Пример использования
 const root = buildTreeFromArray([5, 3, 6, 2, 4, null, 8, 1, null, null, null, 7, 9]);
 
 const newRoot = increasingBST(root);
 
-printTree(newRoot); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+printTree(newRoot);
 
