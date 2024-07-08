@@ -7,8 +7,19 @@
  */
 
 var merge = function(nums1, m, nums2, n) {
-    for (let i = m, j = 0; j < n; i++, j++) {
-        nums1[i] = nums2[j];
+   let j = 0
+    for (let i = 0; i < m + n; i++) {
+        if (nums2[j] <= nums1[i]) {
+            nums1.splice(i, 0, nums2[j])
+            j++
+        }
     }
-    nums1.sort((a, b) => a - b);
+    
+    while (m + j < m + n) {
+        nums1.splice(m + j, 0, nums2[j])
+        j++
+    }
+    
+    nums1.splice(m + n, m + (2 * n))
+    return nums1
 };
